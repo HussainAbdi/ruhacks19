@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import Header from "./Header";
+import Card from "./Card";
+import firebase from "../firebase";
 
 import "../fonts.css";
 
@@ -11,52 +13,53 @@ const CardContainer = styled.div`
   max-width: 1024px;
 `;
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-image: linear-gradient(to top, #dd8a00, #da1b60);
-  border-radius: 20px;
-  margin: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  max-width: 342px;
-  width: 100%;
-  height: 100%;
-`;
-
-const Title = styled.p`
-  margin: block;
-  font-family: "San Francisco";
-  font-weight: 700;
-  color: #ffffff;
-  font-size: 24px;
-`;
-
 const Container = styled.div`
   flex-direction: row;
 `;
 
 class Enrich extends React.Component {
+  state = {
+    questions: [],
+    original: null
+  };
+
+  componentWillMount() {
+    const ref = firebase.database().ref("/");
+    ref.on("value", snapshot => {
+      let arr = [];
+
+      for (let i of Object.keys(snapshot.val())) {
+        arr.push({
+          key: i,
+          ...snapshot.val()[i]
+        });
+      }
+
+      arr.sort((a, b) =>
+        a.upvotes > b.upvotes ? -1 : b.upvotes > a.upvotes ? 1 : 0
+      );
+
+      arr = arr.slice(0, 3);
+
+      this.setState({
+        questions: arr,
+        original: snapshot.val()
+      });
+    });
+  }
+
   render() {
     return (
       <Container>
         <Header text={"Today's Questions"} />
         <CardContainer>
-          <Card>
-            <Title>What's your favourite part of the day?</Title>
-          </Card>
-          <Card>
-            <Title>
-              What's your favourite meal fj rfj rjf rjfrj r vir vir vijr vijr
-              vijr vijr vijr vijr vijr?
-            </Title>
-          </Card>
-          <Card>
-            <Title>
-              What do you think about global warming? And the future of the
-              world with it?
-            </Title>
-          </Card>
+          {this.state.questions.map(question => (
+            <Card
+              title={question.question}
+              commentNumber={question.answers.length || 0}
+              url={question.key || ""}
+            />
+          ))}
         </CardContainer>
       </Container>
     );

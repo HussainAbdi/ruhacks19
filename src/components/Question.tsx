@@ -5,7 +5,7 @@ import "../fonts.css";
 
 const QuestionContainer = styled.div`
   background-color: green;
-  width: 100%;
+  /* width: 100%; */
   padding: 20px;
   margin: 10px;
   border-radius: 20px;
@@ -13,6 +13,7 @@ const QuestionContainer = styled.div`
   font-size: 28px;
   display: flex;
   justify-content: space-between;
+  background-image: linear-gradient(to top, #dd8a00, #da1b60);
 `;
 
 const Question = styled.div`
@@ -22,28 +23,34 @@ const Question = styled.div`
   text-align: center;
 `;
 
-const ScoreBadge = styled.div``;
+const ScoreBadge = styled.div`
+  font-weight: 800;
+  color: white;
+`;
 
 interface IProps {
   text: string;
+  padding: number;
+  fontScale: number;
+  value: number;
+  upvote: any;
 }
 
 class QuestionRow extends React.Component<IProps> {
-  state = {
-    count: 0
-  };
-
   render() {
+    const { padding, fontScale, text, upvote, value } = this.props;
+
     return (
       <QuestionContainer
-        onClick={() =>
-          this.setState({
-            count: this.state.count + 1
-          })
-        }
+        style={{
+          marginRight: padding,
+          marginLeft: padding,
+          fontSize: 24 * fontScale
+        }}
+        onClick={upvote}
       >
-        <Question>{this.props.text}</Question>
-        <ScoreBadge>{this.state.count}</ScoreBadge>
+        <Question>{text}</Question>
+        <ScoreBadge>{value}</ScoreBadge>
       </QuestionContainer>
     );
   }

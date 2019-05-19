@@ -2,17 +2,22 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderContainer = styled.div`
+  display: flex;
   padding-left: 20px;
   padding-right: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
 `;
 
 const HeaderText = styled.div`
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
   background-color: white;
   font-family: "San Francisco";
   font-weight: 700;
   text-align: center;
-  margin-left: 25.3%;
-  margin-right: 25.3%;
   color: #000000;
   font-size: 48px;
   border-radius: 20px;
