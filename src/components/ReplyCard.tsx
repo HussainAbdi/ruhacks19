@@ -6,7 +6,7 @@ import "../fonts.css";
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(to top, #dd8a00, #da1b60);
+  background-image: linear-gradient(to top, #191970, #8b008b);
   border-radius: 20px;
   margin: 10px;
   max-width: 1024px;

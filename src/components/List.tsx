@@ -6,6 +6,7 @@ import firebase from "../firebase";
 import "../fonts.css";
 import QuestionRow from "./Question";
 import Header from "./Header";
+import QuestionInput from "./QuestionInput";
 
 const Container = styled.div`
   flex-direction: row;
@@ -56,6 +57,17 @@ class List extends React.Component<IProps> {
     }
   };
 
+  addQuestion = question => {
+    if (!this.props.loggedIn) return;
+    firebase
+      .database()
+      .ref("/")
+      .push({
+        question,
+        upvotes: 0
+      });
+  };
+
   render() {
     return (
       <Container>
@@ -80,6 +92,7 @@ class List extends React.Component<IProps> {
             </>
           );
         })}
+        <QuestionInput addQuestion={question => this.addQuestion(question)} />
       </Container>
     );
   }

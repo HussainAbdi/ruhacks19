@@ -57,6 +57,18 @@ class App extends React.Component {
     );
   };
 
+  logIn = (email, password) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(user => {
+        store.loggedIn = true;
+        this.setState({
+          user: user.user
+        });
+      });
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -66,16 +78,19 @@ class App extends React.Component {
             logout={() => this.logout()}
           />
           <BodyContainer>
-            <Helmet
+            {/* <Helmet
               bodyAttributes={{ style: "background-color : rgb(20, 12, 20)" }}
-            />
+            /> */}
             <Switch>
               <Route path="/todays-questions/" component={Enrich} />
               <Route
                 path="/sign-up"
                 component={() => <SignUp createUser={this.createUser} />}
               />
-              <Route path="/log-in" component={Login} />
+              <Route
+                path="/log-in"
+                component={() => <Login logIn={this.logIn} />}
+              />
               <Route
                 path="/question-list"
                 component={() => (

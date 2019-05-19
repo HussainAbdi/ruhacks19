@@ -3,14 +3,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import "../fonts.css";
+import Header from "./Header";
 
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(to top, #dd8a00, #da1b60);
+  background-image: linear-gradient(to top, #191970, #8b008b);
   border-radius: 20px;
   margin: 10px;
   padding-left: 20px;
+  padding: 30px;
   padding-right: 20px;
   max-width: 600px;
   width: 100%;
@@ -28,16 +30,23 @@ const Title = styled.p`
 `;
 
 const Input = styled.div`
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 32px;
+  font-weight: 600;
   font-family: "San Francisco";
   color: white;
 `;
 
 const Label = styled.label`
   font-family: "San Francisco";
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 32px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Container = styled.div`
+  flex-direction: row;
 `;
 
 interface IProps {
@@ -45,54 +54,81 @@ interface IProps {
 }
 
 interface IState {
-  name: string;
-  password: string;
+  email: any;
+  password: any;
 }
 
 class SignUp extends React.Component<IProps, IState> {
   state = {
-    name: "My email",
+    email: "",
     password: ""
   };
 
   render() {
     return (
-      <CardContainer>
-        <Title>Sign Up</Title>
-        <Label>
-          Email:
-          <Input contentEditable={true}>My Email</Input>
-        </Label>
-        <Label>
-          Password:
-          <Input contentEditable={true}>Password</Input>
-        </Label>
-        <Link to="/todays-questions">
-          <div
-            style={{
-              marginTop: 20,
-              textAlign: "center",
-              fontFamily: "San Francisco",
-              fontSize: 24,
-              backgroundColor: "white",
-              marginLeft: 250,
-              marginRight: 250,
-              borderRadius: 10
-            }}
-            onClick={() =>
-              this.props.createUser(
-                `Shehryar${Math.random() * 10000}@gmail.com`,
-                `sdiuhfsidf${Math.random() * 1000}`
-              )
-            }
+      <Container>
+        <Header text="Sign Up" />
+        <CardContainer>
+          <Label style={{ marginBottom: 10 }}>
+            <div style={{ marginRight: 70 }}>Email:</div>
+            <input
+              style={{
+                fontFamily: "San Francisco",
+                fontSize: 32,
+                fontWeight: 600,
+                flex: 1
+              }}
+              onChange={e =>
+                this.setState({
+                  email: e.target.value
+                })
+              }
+              value={this.state.email}
+            />
+          </Label>
+          <Label>
+            <div style={{ marginRight: 10 }}>Password:</div>
+            <input
+              style={{
+                fontFamily: "San Francisco",
+                fontSize: 32,
+                fontWeight: 600,
+                flex: 1
+              }}
+              onChange={e =>
+                this.setState({
+                  password: e.target.value
+                })
+              }
+              type="password"
+              value={this.state.password}
+            />
+          </Label>
+          <Link
+            to="/todays-questions"
+            style={{ textDecoration: "none", color: "black" }}
           >
-            Sign Up
-          </div>
-        </Link>
-        <br />
-        <br />
-        <br />
-      </CardContainer>
+            <div
+              style={{
+                marginTop: 20,
+                textAlign: "center",
+                fontFamily: "San Francisco",
+                fontSize: 24,
+                backgroundColor: "white",
+                marginLeft: 250,
+                marginRight: 250,
+                borderRadius: 10,
+                textDecoration: "none"
+              }}
+              onClick={() =>
+                this.props.createUser(this.state.email, this.state.password)
+              }
+            >
+              Sign Up
+            </div>
+          </Link>
+        </CardContainer>
+      </Container>
     );
   }
 }

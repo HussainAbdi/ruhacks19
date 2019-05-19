@@ -14,9 +14,12 @@ const TabContainer = styled.div`
   float: right;
   border-style: solid;
   background-color: white;
-  border-color: white;
+  border-color: black;
   margin-right: 10px;
   border-radius: 20px;
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
   padding: 10px;
 `;
 

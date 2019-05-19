@@ -18,7 +18,7 @@ const HeaderText = styled.div`
   font-family: "San Francisco";
   font-weight: 700;
   text-align: center;
-  color: #000000;
+  color: black;
   font-size: 48px;
   border-radius: 20px;
 `;

@@ -21,16 +21,21 @@ const Title = styled.p`
   margin: block;
   font-family: "San Francisco";
   font-weight: 700;
-  color: #ffffff;
+  color: black;
+  border-style: solid;
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 200px;
+  margin-right: 10px;
 `;
 
 const Button = styled.div`
   color: white;
-  background-image: linear-gradient(to top, #dd8a00, #da1b60);
+  background-image: linear-gradient(to top, #191970, #8b008b);
   border-radius: 20px;
-  padding-left: 10px;
+  padding-left: 15px;
   float: right;
-  padding-right: 10px;
+  padding-right: 15px;
 `;
 
 interface IProps {
@@ -43,7 +48,17 @@ const ReplyEditCard = (props: IProps) => {
 
   return (
     <CardContainer>
-      <Title contentEditable={true}>{title}</Title>
+      <input
+        placeholder="Your response..."
+        style={{
+          fontFamily: "San Francisco",
+          fontWeight: 500,
+          fontSize: 24,
+          flex: 1,
+          paddingRight: 20,
+          marginRight: 20
+        }}
+      />
       <Button onClick={() => submit("This is just a another test comment")}>
         Comment
       </Button>
