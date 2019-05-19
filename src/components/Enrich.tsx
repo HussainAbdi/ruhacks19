@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Header from "./Header";
+
 import "../fonts.css";
 
 const CardContainer = styled.div`
@@ -30,26 +32,6 @@ const Title = styled.p`
   font-size: 24px;
 `;
 
-const HeaderContainer = styled.div`
-  border-radius: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  display: block;
-  display: inline-block;
-  background-color: white;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-`;
-
-const Header = styled.p`
-  text-align: center;
-  font-family: "San Francisco";
-  font-weight: 700;
-  color: #000000;
-  font-size: 32px;
-`;
-
 const Container = styled.div`
   flex-direction: row;
 `;
@@ -58,9 +40,7 @@ class Enrich extends React.Component {
   render() {
     return (
       <Container>
-        <HeaderContainer>
-          <Header>Today's Questions</Header>
-        </HeaderContainer>
+        <Header text={"Today's Questions"} />
         <CardContainer>
           <Card>
             <Title>What's your favourite part of the day?</Title>
